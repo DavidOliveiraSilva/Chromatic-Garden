@@ -8,6 +8,8 @@ public class Player : MonoBehaviour {
     private float angle;
     public float monitor;
     public bool canMove;
+    public List<GameObject> field;
+    public List<DistanceJoint2D> grab;
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
@@ -18,13 +20,43 @@ public class Player : MonoBehaviour {
         if (canMove) {
             float hor = Input.GetAxis("Horizontal");
             float ver = Input.GetAxis("Vertical");
+            angle = Mathf.Atan2(ver, hor);
             monitor = hor;
             if(Mathf.Abs(hor) > 0 || Mathf.Abs(ver) > 0) {
-                angle = Mathf.Atan2(ver, hor);
+                
                 rb.velocity = new Vector2(speed * Mathf.Cos(angle) * Mathf.Abs(hor) * Time.fixedDeltaTime, speed * Mathf.Sin(angle) * Mathf.Abs(ver) * Time.fixedDeltaTime);
             } else {
                 rb.velocity = new Vector2(0, 0);
             }
         }
+        if (Input.GetButton("Grab")) {
+            Grab();
+        }
+        if (Input.GetButton("LetGo")) {
+            LetGo();
+        }
 	}
+    public void AddOrbOnField(GameObject orb) {
+        field.Add(orb);
+    }
+    public void RemoveOrbFromField(GameObject orb) {
+        field.Remove(orb);
+    }
+    public void Grab() {
+        foreach(GameObject o in field) {
+            DistanceJoint2D dj = gameObject.AddComponent<DistanceJoint2D>();
+            grab.Add(dj);
+            dj.connectedBody = o.GetComponent<Rigidbody2D>();
+            dj.distance = Distance(transform.position, o.transform.position);
+        }
+    }
+    public void LetGo() {
+        foreach (DistanceJoint2D o in grab) {
+            Destroy(o);
+        }
+        grab.Clear();
+    }
+    float Distance(Vector3 p1, Vector3 p2) {
+        return Mathf.Sqrt((p1.x - p2.x)* (p1.x - p2.x) + (p1.y - p2.y)* (p1.y - p2.y));
+    }
 }

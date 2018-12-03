@@ -1,0 +1,1 @@
+﻿public enum Cor { None, Vermelho, Laranja, Amarelo, Limao, Verde, Primavera, Turqueza, Celeste, Cobalto, Roxo, Rosa, Magenta };
