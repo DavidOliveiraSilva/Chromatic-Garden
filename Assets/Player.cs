@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
     public float monitor;
     public bool canMove;
     public List<GameObject> field;
-    public List<DistanceJoint2D> grab;
+    public List<SpringJoint2D> grab;
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
@@ -44,14 +44,17 @@ public class Player : MonoBehaviour {
     }
     public void Grab() {
         foreach(GameObject o in field) {
-            DistanceJoint2D dj = gameObject.AddComponent<DistanceJoint2D>();
-            grab.Add(dj);
-            dj.connectedBody = o.GetComponent<Rigidbody2D>();
-            dj.distance = Distance(transform.position, o.transform.position);
+            SpringJoint2D sj = gameObject.AddComponent<SpringJoint2D>();
+            grab.Add(sj);
+            sj.connectedBody = o.GetComponent<Rigidbody2D>();
+            sj.dampingRatio = 0.5f;
+            sj.frequency = 1.5f;
+            sj.enableCollision = true;
+            sj.distance = Distance(transform.position, o.transform.position)/2.0f;
         }
     }
     public void LetGo() {
-        foreach (DistanceJoint2D o in grab) {
+        foreach (SpringJoint2D o in grab) {
             Destroy(o);
         }
         grab.Clear();

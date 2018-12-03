@@ -92,6 +92,8 @@ MonoBehaviour:
   speed: 500
   monitor: 0
   canMove: 1
+  field: []
+  grab: []
 --- !u!212 &212900470376980674
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -124,8 +126,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1383817095
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 563cd55a18adb33479e846fa1236d16c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
