@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Conections : MonoBehaviour {
+public class Connections : MonoBehaviour {
     public Cor[] cores;
     private bool[,] connectionsMatrix;
     // Use this for initialization
