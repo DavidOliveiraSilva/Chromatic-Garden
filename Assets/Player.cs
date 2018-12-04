@@ -10,8 +10,10 @@ public class Player : MonoBehaviour {
     public bool canMove;
     public List<GameObject> field;
     public List<SpringJoint2D> grab;
-	// Use this for initialization
-	void Start () {
+    [Range(0.0f, 1.0f)]
+    public float grabDistance;
+    // Use this for initialization
+    void Start () {
         rb = GetComponent<Rigidbody2D>();
 	}
 	
@@ -43,14 +45,15 @@ public class Player : MonoBehaviour {
         field.Remove(orb);
     }
     public void Grab() {
+        LetGo();
         foreach(GameObject o in field) {
             SpringJoint2D sj = gameObject.AddComponent<SpringJoint2D>();
             grab.Add(sj);
             sj.connectedBody = o.GetComponent<Rigidbody2D>();
-            sj.dampingRatio = 0.5f;
+            sj.dampingRatio = 1f;
             sj.frequency = 1.5f;
             sj.enableCollision = true;
-            sj.distance = Distance(transform.position, o.transform.position)/2.0f;
+            sj.distance = Distance(transform.position, o.transform.position)*grabDistance;
         }
     }
     public void LetGo() {
@@ -61,5 +64,16 @@ public class Player : MonoBehaviour {
     }
     float Distance(Vector3 p1, Vector3 p2) {
         return Mathf.Sqrt((p1.x - p2.x)* (p1.x - p2.x) + (p1.y - p2.y)* (p1.y - p2.y));
+    }
+    public void TransportAllOrbs(float dx, float dy) {
+        foreach (SpringJoint2D sj in grab) {
+            print(sj.connectedBody.gameObject.transform.position);
+            sj.connectedBody.gameObject.transform.position = AproximatePosition();
+            print(sj.connectedBody.gameObject.transform.position);
+            print(sj.connectedBody.gameObject.name);
+        }
+    }
+    Vector3 AproximatePosition() {
+        return new Vector3(transform.position.x + Random.Range(-1.0f, 1.0f), transform.position.y + Random.Range(-1.0f, 1.0f), transform.position.z);
     }
 }

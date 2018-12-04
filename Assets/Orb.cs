@@ -8,22 +8,31 @@ public class Orb : MonoBehaviour {
     public GameObject link;
     private SpriteRenderer sr;
     private List<GameObject> orbs;
+    //public ParticleSystem shine;
+    public int receiving;
     // Use this for initialization
 	void Start () {
         connections = GameObject.Find("GameManager").GetComponent<Connections>();
         sr = GetComponent<SpriteRenderer>();
-	}
+        //shine = transform.Find("Shine").GetComponent<ParticleSystem>();
+        //var psmain = shine.main;
+        //psmain.startColor = sr.color;
+    }
 	
 	// Update is called once per frame
 	void Update () {
+        
 		foreach(Transform t in transform) {
-            if(Distance(transform.position, t.gameObject.GetComponent<Linking>().receiver.transform.position) < 3) {
-                if (!t.GetComponent<ParticleSystem>().isEmitting) {
-                    t.gameObject.GetComponent<ParticleSystem>().Play();
+            if (t.name == "link") {
+                if (Distance(transform.position, t.gameObject.GetComponent<Linking>().receiver.transform.position) < 3) {
+                    if (!t.GetComponent<ParticleSystem>().isEmitting) {
+                        t.GetComponent<ParticleSystem>().Play();
+                        //t.GetComponent<Linking>().receiver.GetComponent<Orb>().shine.Emit(10);
+                    }
+                } else {
+                    t.GetComponent<ParticleSystem>().Stop();
+                    
                 }
-
-            } else {
-                t.gameObject.GetComponent<ParticleSystem>().Stop();
             }
         }
 	}
@@ -49,6 +58,7 @@ public class Orb : MonoBehaviour {
                 float dx = transform.position.x - collision.transform.position.x;
                 float angle = Mathf.Atan2(dy, dx)*Mathf.Rad2Deg;
                 l.transform.eulerAngles = new Vector3(0, 0, angle);
+                //collision.gameObject.GetComponent<Orb>().shine.Play();
             }
         }
     }
@@ -59,13 +69,13 @@ public class Orb : MonoBehaviour {
     }
     private bool HasLink(GameObject orb) {
         foreach(Transform t in transform) {
-            if(t.gameObject.GetComponent<Linking>().receiver == orb) {
+            if(t.name == "link" && t.gameObject.GetComponent<Linking>().receiver == orb) {
                 return true;
             }
         }
         return false;
     }
-    float Distance(Vector3 p1, Vector3 p2) {
+    public float Distance(Vector3 p1, Vector3 p2) {
         return Mathf.Sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
     }
 }
