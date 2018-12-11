@@ -1208,22 +1208,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LookaheadTime: 0.1
-  m_LookaheadSmoothing: 30
-  m_XDamping: 0.5
-  m_YDamping: 0.5
+  m_LookaheadTime: 0.25
+  m_LookaheadSmoothing: 25
+  m_XDamping: 3
+  m_YDamping: 3
   m_ZDamping: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0
+  m_DeadZoneWidth: 0.1
+  m_DeadZoneHeight: 0.15
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 2
   m_SoftZoneHeight: 2
-  m_BiasX: 0.18800008
-  m_BiasY: 0.20599991
+  m_BiasX: 0.18800014
+  m_BiasY: 0.20599987
   m_GroupFramingMode: 2
   m_AdjustmentMode: 2
   m_GroupFramingSize: 0.8
@@ -1311,15 +1311,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4185176527758034, guid: 303d05efee5baf047a339f31d11d278d, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4.458
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4185176527758034, guid: 303d05efee5baf047a339f31d11d278d, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.365
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4185176527758034, guid: 303d05efee5baf047a339f31d11d278d, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4185176527758034, guid: 303d05efee5baf047a339f31d11d278d, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1344,12 +1344,12 @@ Prefab:
     - target: {fileID: 20432701118096370, guid: 303d05efee5baf047a339f31d11d278d,
         type: 2}
       propertyPath: orthographic size
-      value: 5.89
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 20432701118096370, guid: 303d05efee5baf047a339f31d11d278d,
         type: 2}
       propertyPath: field of view
-      value: 50
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 303d05efee5baf047a339f31d11d278d, type: 2}
@@ -1740,7 +1740,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1856937413}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.458, y: 0.365, z: -10}
+  m_LocalPosition: {x: -4.458, y: 0.3650003, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1172454555}
